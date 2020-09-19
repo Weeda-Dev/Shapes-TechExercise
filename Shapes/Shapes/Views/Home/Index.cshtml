@@ -22,7 +22,7 @@
 
     @foreach (var item in Model)
     {
-        <tr class="rowToClick" onclick="toggleDetails()">
+        <tr class="rowToClick">
             <td>
                 @Html.DisplayFor(modelItem => item.name)
             </td>
@@ -32,7 +32,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.density)
             </td>
-            <td class="detailsToShow" style="display:none">
+        </tr>
+        <tr style="display: none;">
+            <td class="detailsToShow">
                 @{
                     Html.RenderAction("Details", "Home", new { itemName = item.name });
                 }
@@ -42,8 +44,14 @@
 
 </table>
 
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
 <script>
-    function toggleDetails() {
-        $('.detailsToShow').toggle();
-    }
+
+    //jQuery
+
+    $(".rowToClick").click(function () {
+        $(this).next('tr') // Retrieves the tr that was clicked
+            .toggle();
+    });
 </script>
